@@ -24,10 +24,10 @@ class Download extends React.Component {
       let cogs = data.product_details.cogs;
       let price = data.product_details.price;
       let sku = data.product_details.sku;
-      let details = {id,title,cogs,price,variant,sku}
-      return details;  
+      let details = { id, title, cogs, price, variant, sku };
+      return details;
     });
-    this.setState({csv: data});
+    this.setState({ csv: data });
   }
 
   render() {
@@ -38,7 +38,9 @@ class Download extends React.Component {
         <div style={{ marginLeft: "25%" }}>
           <div>Download CSV Section</div>
           <div>
-            <button ><CSVLink data={this.state.csv}>Download CSV</CSVLink></button>
+            <button>
+              <CSVLink data={this.state.csv}>Download CSV</CSVLink>
+            </button>
           </div>
         </div>
       </div>
@@ -47,13 +49,3 @@ class Download extends React.Component {
 }
 
 export default Download;
-
-//    mock.forEach(element => {
-// this.setState({
-//     id : element.id ,
-//       variant: element.product_details.variant,
-//       title: element.product_details.title,
-//       sku: element.product_details.sku,
-//       price: element.product_details.price,
-//       cogs: element.product_details.cogs})
-//     });
