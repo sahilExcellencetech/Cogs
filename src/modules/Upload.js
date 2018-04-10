@@ -3,9 +3,9 @@ import Sidebar from "../component/Sidebar";
 import Header from "../component/Header";
 import CSVReader from "react-csv-reader";
 import "./Upload.css";
-import _ from 'lodash';
-import fs from 'fs'
-import createFile from 'create-file'
+import _ from "lodash";
+import fs from "fs";
+import createFile from "create-file";
 
 class Upload extends React.Component {
   constructor() {
@@ -38,13 +38,22 @@ class Upload extends React.Component {
       status: true
     });
   };
-  
-  onChange(b,x) {
+
+  onChange(b, x) {
     let { table } = this.state;
-    console.log(b,x, table, _.findIndex(table, function(o){ return o.id == b}))
-    const index = _.findIndex(table, function(o){ return o.id == b});
-    table[index]['cogs'] = x;
-    this.setState({table: table});
+    console.log(
+      b,
+      x,
+      table,
+      _.findIndex(table, function(o) {
+        return o.id == b;
+      })
+    );
+    const index = _.findIndex(table, function(o) {
+      return o.id == b;
+    });
+    table[index]["cogs"] = x;
+    this.setState({ table: table });
   }
   render() {
     return (
@@ -63,40 +72,41 @@ class Upload extends React.Component {
             <br />
 
             {this.state.status === true ? (
-            <div>
-            <table id="t01">
-                <thead>
-                <tr>
-                  <th>id</th>
-                  <th>title</th>
-                  <th>price</th>
-                  <th>variant</th>
-                  <th>sku</th>
-                  <th>cogs</th>
-                </tr>
-                </thead>
-                <tbody>
-                {this.state.table.map((val, i) => (
-                  <tr key={i} value={val.id}>
-                    <td >{val.id}</td>
-                    <td >{val.title}</td>
-                    <td >{val.price}</td>
-                    <td >{val.variant}</td>
-                    <td >{val.sku}</td>
-                    <td>
-                    <input
-                      type="text"
-                      value={val.cogs}
-                      onChange={(e) => this.onChange(val.id,e.target.value)}
-                    />
-                    </td>
-                  </tr>
-                ))}
-                </tbody>                
-              </table>
-              </div>  ) : null
-           
-            }
+              <div>
+                <table id="t01">
+                  <thead>
+                    <tr>
+                      <th>id</th>
+                      <th>title</th>
+                      <th>price</th>
+                      <th>variant</th>
+                      <th>sku</th>
+                      <th>cogs</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {this.state.table.map((val, i) => (
+                      <tr key={i} value={val.id}>
+                        <td>{val.id}</td>
+                        <td>{val.title}</td>
+                        <td>{val.price}</td>
+                        <td>{val.variant}</td>
+                        <td>{val.sku}</td>
+                        <td>
+                          <input
+                            type="text"
+                            value={val.cogs}
+                            onChange={e =>
+                              this.onChange(val.id, e.target.value)
+                            }
+                          />
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            ) : null}
           </div>
         </div>
       </div>
