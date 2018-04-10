@@ -3,19 +3,21 @@ import Sidebar from "../component/Sidebar";
 import Header from "../component/Header";
 import CSVReader from "react-csv-reader";
 import "./Upload.css";
+import _ from 'lodash';
+import fs from 'fs'
+import createFile from 'create-file'
 
 class Upload extends React.Component {
   constructor() {
     super();
     this.state = {
-      table: "",
+      table: {},
       status: false,
       value: ""
     };
     this.handleForce = this.handleForce.bind(this);
     this.onChange = this.onChange.bind(this);
   }
-
   handleForce = data => {
     data.splice(0, 1);
     let array = [];
@@ -36,8 +38,14 @@ class Upload extends React.Component {
       status: true
     });
   };
-
-  onChange(e) {}
+  
+  onChange(b,x) {
+    let { table } = this.state;
+    console.log(b,x, table, _.findIndex(table, function(o){ return o.id == b}))
+    const index = _.findIndex(table, function(o){ return o.id == b});
+    table[index]['cogs'] = x;
+    this.setState({table: table});
+  }
   render() {
     return (
       <div>
@@ -53,8 +61,11 @@ class Upload extends React.Component {
           </div>
           <div>
             <br />
+
             {this.state.status === true ? (
-              <table id="t01">
+            <div>
+            <table id="t01">
+                <thead>
                 <tr>
                   <th>id</th>
                   <th>title</th>
@@ -63,24 +74,29 @@ class Upload extends React.Component {
                   <th>sku</th>
                   <th>cogs</th>
                 </tr>
-
+                </thead>
+                <tbody>
                 {this.state.table.map((val, i) => (
-                  <tr key={i}>
-                    <td key={i}>{val.id}</td>
-                    <td key={i}>{val.title}</td>
-                    <td key={i}>{val.price}</td>
-                    <td key={i}>{val.variant}</td>
-                    <td key={i}>{val.sku}</td>
+                  <tr key={i} value={val.id}>
+                    <td >{val.id}</td>
+                    <td >{val.title}</td>
+                    <td >{val.price}</td>
+                    <td >{val.variant}</td>
+                    <td >{val.sku}</td>
+                    <td>
                     <input
-                      key={i}
                       type="text"
                       value={val.cogs}
-                      onChange={e => this.onChange(e)}
+                      onChange={(e) => this.onChange(val.id,e.target.value)}
                     />
+                    </td>
                   </tr>
                 ))}
+                </tbody>                
               </table>
-            ) : null}
+              </div>  ) : null
+           
+            }
           </div>
         </div>
       </div>

@@ -5,7 +5,9 @@
   "dependencies": {
     "antd": "^3.3.3",
     "convert-csv-to-json": "0.0.13",
+    "create-file": "^1.0.1",
     "csvtojson": "^1.1.9",
+    "fs": "0.0.1-security",
     "lodash": "^4.17.5",
     "react": "^16.2.0",
     "react-bootstrap": "^0.32.1",
