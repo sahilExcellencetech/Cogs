@@ -4,11 +4,7 @@ import Header from "../component/Header";
 import { CSVLink } from "react-csv";
 import mock from "../mock.json";
 import _ from "lodash";
-let id;
-let variant;
-let title;
-let cogs;
-let price;
+
 class Download extends React.Component {
   constructor() {
     super();
@@ -35,7 +31,7 @@ class Download extends React.Component {
       <div>
         <Header />
         <Sidebar />
-        <div style={{ marginLeft: "25%" }}>
+        <div style={{ marginLeft: "20%" }}>
           <div>Download CSV Section</div>
           <div>
             <button>
